@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Carta para [Tu pareja] - Abrir</title>
+  <style>
+    :root{
+      --fucsia:#ff7fb3; /* suave */
+      --fucsia-2:#ff5aa1;
+      --naranja:#ff9a4d;
+      --bg:#fff0f6;
+      --text:#3a2a2a;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--text)}
+    .stage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+
+    /* Envelope */
+    .envelope-wrap{width:360px;max-width:92vw;perspective:1400px}
+    .envelope{position:relative;width:100%;height:220px;border-radius:12px;background:linear-gradient(135deg,var(--fucsia),#ffd5ea);box-shadow:0 10px 30px rgba(0,0,0,0.12);overflow:visible;transform-origin:center top}
+    .flap{position:absolute;left:0;right:0;top:-80px;height:160px;border-radius:12px;background:linear-gradient(180deg,var(--fucsia-2),var(--fucsia));transform-origin:top center;box-shadow:0 12px 30px rgba(0,0,0,0.15);display:flex;align-items:flex-end;justify-content:center;padding-bottom:18px}
+    .flap:after{content:'';width:0;height:0;border-left:60px solid transparent;border-right:60px solid transparent;border-top:60px solid rgba(255,255,255,0.06);position:absolute;bottom:-60px;left:50%;transform:translateX(-50%)}
+
+    .seal{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff6,rgba(255,255,255,0));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;filter:drop-shadow(0 3px 8px rgba(0,0,0,0.15))}
+
+    /* Inside card */
+    .card{position:absolute;left:10px;right:10px;top:30px;bottom:10px;background:#fff;border-radius:10px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;transform:translateY(18px);opacity:0}
+    .photo-placeholder{width:100%;height:160px;border-radius:8px;background:linear-gradient(180deg,#fff #ffeef8);border:2px dashed #ffd9e8;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+    .photo-placeholder img{width:100%;height:100%;object-fit:cover}
+    .photo-actions{position:absolute;left:8px;top:8px;display:flex;gap:8px}
+    .btn{background:var(--naranja);border:none;padding:8px 12px;border-radius:8px;color:#fff;font-weight:600;cursor:pointer}
+
+    .read-btn{margin-top:14px;background:linear-gradient(90deg,var(--fucsia-2),var(--naranja));border:none;color:#fff;padding:10px 16px;border-radius:999px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(255,90,160,0.18)}
+
+    /* Hidden letter text */
+    .letter{margin-top:14px;width:100%;padding:12px;border-radius:8px;background:linear-gradient(180deg,#fff,#fffafa);min-height:160px;display:none;flex-direction:column}
+    .letter[contenteditable]{outline:none;border:2px dashed transparent}
+    .controls{margin-top:12px;display:flex;gap:8px;justify-content:center}
+
+    /* animation open */
+    .opened .flap{animation:flipDown 800ms cubic-bezier(.2,.9,.26,1) forwards}
+    .opened .envelope{transform:translateY(-18px)}
+    .opened .card{animation:cardIn 700ms cubic-bezier(.2,.9,.26,1) forwards}
+
+    @keyframes flipDown{0%{transform:rotateX(0)}100%{transform:rotateX(180deg);transform-origin:top center}}
+    @keyframes cardIn{0%{transform:translateY(26px);opacity:0}100%{transform:translateY(0);opacity:1}}
+
+    /* sunflower decorations */\    
+    .sunflower{position:absolute;z-index:3;width:72px;height:72px}
+    .sunflower.right{right:-12px;bottom:-12px}
+    .sunflower.left{left:-12px;top:-12px}
+
+    /* responsive */
+    @media (min-width:720px){.envelope-wrap{width:420px}.envelope{height:260px}.card{top:36px}}
+
+    /* small helpers */
+    .small{font-size:13px;color:#6a4c4c}
+    .download{background:#7f4b8b;padding:8px 12px;border-radius:8px;color:#fff;border:none}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="envelope-wrap opened" id="envWrap">
+      <div class="sunflower left" aria-hidden="">
+        <!-- inline sunflower SVG -->
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+          <circle cx="32" cy="32" r="8" fill="#6b3b1a"></circle>
+          <!-- petals -->
+          <g fill="#ffcf4d">
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(0 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(40 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(80 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(120 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(160 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(200 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(240 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(280 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(320 32 32) translate(0,12)"></path>
+          </g>
+        </svg>
+      </div>
+
+      <div class="envelope" id="envelope">
+        <div class="flap" id="flap">
+          <div class="seal">❤</div>
+        </div>
+
+        <div class="card" id="card">
+          <div class="photo-placeholder" id="photoBox"><img src="blob:null/fdd1ab06-fec7-40b7-9dc1-10cbbfa13ac4" alt="Foto"><button class="btn" id="removePhotoBottom" style="position:absolute;left:8px;top:8px">Quitar</button></div>
+
+          <button class="read-btn" id="readBtn">Leer carta</button>
+
+          <div class="letter" id="letter" contenteditable="true" aria-label="Escribe tu carta aquí" style="display: none;"><p dir="ltr" style="line-height:1.38;margin-top:0.0pt;margin-bottom:0.0pt;" id="docs-internal-guid-951ed3de-7fff-9593-85ff-ab8465f421ac"><span style="font-size: 12pt; font-family: Arial, sans-serif; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">Antes que nada, te quiero desear un muy feliz cumpleaños, que te amo mucho mas cada dia y que le pido a la vida que te de mucho más de lo que das.</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><br></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">esto es un mini recorrido por todo los momentos que tuvimos a lo largo de estos años estando juntos, esa foto enmarca uno de (para mi) los mejores momentos juntos, mirando una peli que no sabíamos que nos iba a llegar tanto, y sentirnos identificados. Esa noche fue hermosa, como la mujer que me acompaña todo los dias.</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">Como aquella salida que tuvimos, en la que fuimos a la feria en la plaza amat, donde nos cruzamos a nuestros profes jaja, que bueno estuvo. Quien diria que sus alumnos iban a terminar juntos no? y mas tarde cruzandose con ellos.</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">Una de las mas reciente cuando fuimos al museo, que de la nada me volvi una especie de guia indicando para donde habia que ir, metiendonos en calles recontra turbias, comprando chocolates (aunque eso lo hiciste vos) pero bueno, todo sea por vos amor.</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><br></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">Como no amar a la mujer que se preocupa tanto por mi, me inspira a avanzar en la vida, a proyectar, que me acompaña tambien en lo que yo proponga y que es tan compañera.</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><br></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">Quiero que sepas que estoy para lo que necesites, soy la persona que te elige siempre y que está todos los días acompañandote en todo. me gustaria darte mas de lo que está a mi alcance, pero se que no se puede tapar el sol con un dedo (mambos mios jaja).</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><br></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">Le agradezco a dios por haberme puesto en tu camino, quiero decirte que te amo con todo mi corazón, sos el amor de mi vida y quiero que distrutes tu dia de la mejor manera junto a tus seres queridos.</span></p><p dir="ltr" style="line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;"><span style="font-size: 12pt; font-family: Arial, sans-serif; background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-variant-position: normal; vertical-align: baseline; white-space-collapse: preserve;">te amo mucho amor</span></p>
+            <!-- espacio vacío para que escribas -->
+          </div>
+
+          <div class="controls">
+            <button class="btn" id="saveBtn">Descargar HTML</button>
+            <button class="download" id="resetBtn">Restablecer</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sunflower right" aria-hidden="">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+          <circle cx="32" cy="32" r="8" fill="#6b3b1a"></circle>
+          <g fill="#ffcf4d">
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(0 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(40 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(80 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(120 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(160 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(200 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(240 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(280 32 32) translate(0,12)"></path>
+            <path d="M32 2 L36 20 L28 20 Z" transform="rotate(320 32 32) translate(0,12)"></path>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const envWrap = document.getElementById('envWrap')
+    const envelope = document.getElementById('envelope')
+    const flap = document.getElementById('flap')
+    const card = document.getElementById('card')
+    const readBtn = document.getElementById('readBtn')
+    const letter = document.getElementById('letter')
+    const photoInput = document.getElementById('photoInput')
+    const photoBox = document.getElementById('photoBox')
+    const photoText = document.getElementById('photoText')
+    const removePhoto = document.getElementById('removePhoto')
+    const saveBtn = document.getElementById('saveBtn')
+    const resetBtn = document.getElementById('resetBtn')
+
+    // open envelope when clicking flap or seal
+    flap.addEventListener('click', openEnvelope)
+    envelope.addEventListener('click', function(e){
+      // avoid opening when clicking inside card controls
+      if(e.target.closest('.card')) return
+      openEnvelope()
+    })
+
+    function openEnvelope(){
+      if(envWrap.classList.contains('opened')) return
+      envWrap.classList.add('opened')
+      // focus letter after animation
+      setTimeout(()=>{letter.focus()},900)
+    }
+
+    // show/hide letter with read button
+    readBtn.addEventListener('click', ()=>{
+      if(letter.style.display === 'flex'){
+        letter.style.display = 'none'
+        readBtn.textContent = 'Leer carta'
+      } else {
+        letter.style.display = 'flex'
+        readBtn.textContent = 'Ocultar carta'
+      }
+    })
+
+    // photo upload
+    photoBox.addEventListener('click', ()=> photoInput.click())
+    photoInput.addEventListener('change', (e)=>{
+      const file = e.target.files[0]
+      if(!file) return
+      const url = URL.createObjectURL(file)
+      photoBox.innerHTML = `<img src="${url}" alt="Foto">` +
+        '<button class="btn" id="removePhotoBottom" style="position:absolute;left:8px;top:8px">Quitar</button>'
+      const rem = document.getElementById('removePhotoBottom')
+      rem && rem.addEventListener('click', (ev)=>{ ev.stopPropagation(); resetPhoto() })
+    })
+    removePhoto.addEventListener('click', (e)=>{ e.stopPropagation(); resetPhoto() })
+    function resetPhoto(){
+      photoInput.value = ''
+      photoBox.innerHTML = '<div id="photoText" style="text-align:center;padding:12px;color:#b35c7a">Aún no hay foto<br><span class="small">(subila desde aquí)</span></div>'
+    }
+
+    // Download the current page as a single HTML file (so podés editar offline y subir)
+    saveBtn.addEventListener('click', ()=>{
+      // get current HTML and inline styles/scripts to make it portable
+      const doc = `<!doctype html>\n` + document.documentElement.outerHTML
+      const blob = new Blob([doc], {type:'text/html'})
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'carta-abierta.html'
+      document.body.appendChild(a); a.click(); a.remove()
+      URL.revokeObjectURL(url)
+    })
+
+    // reset everything
+    resetBtn.addEventListener('click', ()=>{
+      if(confirm('Restablecer la carta y quitar foto/texto?')){
+        resetPhoto()
+        letter.innerHTML = ''
+        envWrap.classList.remove('opened')
+        letter.style.display = 'none'
+        readBtn.textContent = 'Leer carta'
+      }
+    })
+
+    // improve mobile touch target
+    document.addEventListener('touchstart', ()=>{})
+  </script>
+
+</body></html>
